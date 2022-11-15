@@ -1,10 +1,9 @@
 require 'sanitize'
 
 class HTMLCreator
-  def html_create(content, bypass_html, file_name = 'index.html')
-    content = Sanitize.fragment(content) unless bypass_html
-    content = content unless bypass_html == false
-
+  def html_create(content, bypass_html = false, file_name = 'index.html')
+    content = bypass_html ? Sanitize.fragment(content) : content
+    
     f = File.open(file_name, "w+")
     f.puts "<!DOCTYPE html>"
     f.puts "<html lang=\"uk\">"
